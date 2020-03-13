@@ -59,6 +59,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!--添加对commond的依赖-->
+        <dependency>
+            <groupId>com.guli</groupId>
+            <artifactId>guli-framework-common</artifactId>
+            <version>${guli.version}</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>
