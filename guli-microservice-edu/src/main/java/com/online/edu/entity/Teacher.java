@@ -32,38 +32,38 @@ public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "讲师ID")
+    @ApiModelProperty(value = "讲师ID",example = "")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "讲师姓名")
+    @ApiModelProperty(value = "讲师姓名",example = "张三")
     private String name;
 
-    @ApiModelProperty(value = "讲师资历,一句话说明讲师")
+    @ApiModelProperty(value = "讲师资历,一句话说明讲师",example = "无")
     private String intro;
 
-    @ApiModelProperty(value = "讲师简介")
+    @ApiModelProperty(value = "讲师简介",example = "无")
     private String career;
 
-    @ApiModelProperty(value = "头衔 1高级讲师 2首席讲师")
+    @ApiModelProperty(value = "头衔 1高级讲师 2首席讲师",example = "0")
     private Integer level;
 
-    @ApiModelProperty(value = "讲师头像")
+    @ApiModelProperty(value = "讲师头像",example = "无")
     private String avatar;
 
-    @ApiModelProperty(value = "排序")
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer sort;
 
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableField(value = "is_deleted")
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除",example = "0")
+//    @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "创建时间",example = "2020-3-13 18:18:18")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "更新时间",example = "2020-3-13 18:18:18")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 

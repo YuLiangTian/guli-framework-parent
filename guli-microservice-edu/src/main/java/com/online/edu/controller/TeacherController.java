@@ -3,8 +3,10 @@ package com.online.edu.controller;
 
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.guli.common.vo.R;
 import com.online.edu.entity.Teacher;
+import com.online.edu.query.TeacherQuery;
 import com.online.edu.service.TeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,5 +53,82 @@ public class TeacherController {
             return R.error().message("删除失败");
         }
     }
+
+    @ApiOperation(value = "分页查询讲师信息")
+    @GetMapping("list/{page}/{limit}")
+    public R pageList(
+            @ApiParam(name = "page",value = "当前页码",required = true)
+            @PathVariable("page") Long page,
+            @ApiParam(name = "limit",value = "每页记录数",required = true)
+            @PathVariable("limit") Long limit){
+
+        Page<Teacher> pageParm = new Page<>(page,limit);
+
+        teacherService.page(pageParm,null);
+        val records = pageParm.getRecords();
+        val total = pageParm.getTotal();
+
+        return R.ok().data("total",total).data("rows",records);
+    }
+
+    @ApiOperation("条件分页查询讲师信息")
+    @GetMapping("page/{page}/{limit}")
+    public R pageQuery(
+            @ApiParam(name = "page",value = "当前页",required = true)
+            @PathVariable("page") Long page,
+
+            @ApiParam(name = "limit",value = "每页记录数",required = true)
+            @PathVariable("limit") Long limit,
+
+            @ApiParam(name = "teacherQuery", value = "查询对象", required = false)
+            TeacherQuery teacherQuery){
+        Page<Teacher> pageParm = new Page<>();
+
+        teacherService.pageQuery(pageParm,teacherQuery);
+        val records = pageParm.getRecords();
+        val total = pageParm.getTotal();
+        return R.ok().data("total",total).data("rows",records);
+    }
+
+    @ApiOperation("添加讲师")
+    @PostMapping
+    public R addTeacher(
+            @ApiParam(name="teacher",value = "讲师信息",required = true)
+            @RequestBody Teacher teacher){
+        //判断是否添加成功
+        if(teacherService.save(teacher)){
+            return R.ok().message("添加成功");
+        }else{
+            return R.error().message("添加失败");
+        }
+    }
+
+
+    @ApiOperation("查询讲师信息")
+    @GetMapping("/findteacher/{id}")
+    public R findTeacherById(
+            @ApiParam(name = "id",value = "讲师id",required = true)
+            @PathVariable("id") String id){
+
+        val teacher = teacherService.getById(id);
+        return R.ok().data("item",teacher);
+    }
+
+
+    @ApiOperation("修改讲师信息")
+    @PutMapping("/modify/{id}")
+    public R modifyTeacher(
+            @ApiParam(name = "id",value = "讲师id",required = true)
+            @PathVariable("id") String id,
+            @ApiParam(name = "teacher",value = "讲师对象",required = true)
+            @RequestBody Teacher teacher){
+        teacher.setId(id);
+        if(teacherService.updateById(teacher)){
+            return R.ok().message("修改成功");
+        }else{
+            return R.error().message("修改失败");
+        }
+    }
+
 }
 

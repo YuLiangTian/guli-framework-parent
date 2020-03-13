@@ -2,6 +2,7 @@ package com.online.edu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @ClassName EduApplication
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Desc
  */
 @SpringBootApplication
+@ComponentScan(basePackages={"com.online.edu","com.guli.common"})
 public class EduApplication {
 
     public static void main(String[] args) {

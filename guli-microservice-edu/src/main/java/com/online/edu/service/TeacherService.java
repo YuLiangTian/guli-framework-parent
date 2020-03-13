@@ -1,7 +1,9 @@
 package com.online.edu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.online.edu.entity.Teacher;
+import com.online.edu.query.TeacherQuery;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,5 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface TeacherService extends IService<Teacher> {
+
+    void pageQuery(Page<Teacher> page, TeacherQuery teacherQuery);
 
 }
