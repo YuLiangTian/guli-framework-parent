@@ -55,7 +55,7 @@ public class Teacher implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除",example = "0")
-//    @TableField(value = "is_deleted")
+    @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
 
